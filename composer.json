@@ -1,0 +1,30 @@
+{
+    "name": "sopamo/double-laravel",
+    "description": "The laravel package for 'double'",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paul Mohr",
+            "email": "p.mohr@sopamo.de"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^8.78",
+        "illuminate/routing": "^8.78",
+        "illuminate/config": "^8.78"
+    },
+    "autoload": {
+        "psr-4":
+        {
+            "Sopamo\\Double\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sopamo\\Double\\DoubleServiceProvider"
+            ]
+        }
+    }
+}
