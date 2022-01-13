@@ -2,7 +2,6 @@
 
 namespace Sopamo\Double;
 
-use Illuminate\Container\Container;
 use Illuminate\Support\Str;
 
 class PHPLoader {
