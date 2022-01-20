@@ -22,12 +22,10 @@ class PHPLoader {
         }
         $absolutePath = config('double.frontend_root') . DIRECTORY_SEPARATOR . $relativePath;
 
-        $extension = '.v.php';
+        $extension = '.php';
+
         if(!file_exists($absolutePath . $extension)) {
-            $extension = '.ts.php';
-        }
-        if(!file_exists($absolutePath . $extension)) {
-            throw new \InvalidArgumentException('File path ' . $relativePath . ' is invalid. I was looking for ' . $absolutePath . '.v.php and ' . $absolutePath . '.ts.php');
+            throw new \InvalidArgumentException('File path ' . $relativePath . ' is invalid. I was looking for ' . $absolutePath . '.php');
         }
         return $absolutePath . $extension;
     }
