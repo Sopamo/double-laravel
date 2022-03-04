@@ -18,10 +18,28 @@ class DoubleApiController extends BaseController
         $methods = $class->getMethods();
 
         $response = [];
+        $originalConfig = [];
+        $baseRequestData = $request->request->getIterator()->getArrayCopy();
+        if($request->request->has('config')) {
+            $originalConfig = $request->request->get('config');
+            unset($baseRequestData['config']);
+        }
         // Execute all "get" methods and add the results to the response array
         foreach($methods as $method) {
             if(Str::startsWith($method->name, 'get') && ctype_upper(substr($method->name, 3, 1))) {
                 $responseKey = strtolower(substr($method->name, 3, 1)) . substr($method->name, 4);
+
+                // If the request data contains a config for this method, make sure the final request we send to the method implementation
+                // directly contains the config data
+                $requestData = $baseRequestData;
+                if($originalConfig && isset($originalConfig[$method->name])) {
+                    $requestData = [
+                        ...$requestData,
+                        ...$originalConfig[$method->name]
+                    ];
+                }
+                $request->request->replace($requestData);
+
                 $response[$responseKey] = $instance->{$method->name}($request);
             }
         }
