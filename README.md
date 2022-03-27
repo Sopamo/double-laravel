@@ -15,3 +15,5 @@
 <br>
 
 This is the repository for the Laravel part of `double`. For more info & documentation see [double-vue](https://github.com/Sopamo/double-vue).
+
+Go to the [installation instructions](https://github.com/Sopamo/double-vue#installation)
