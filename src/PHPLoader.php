@@ -17,7 +17,7 @@ class PHPLoader {
         if(Str::contains($relativePath, '..')) {
             throw new \InvalidArgumentException('File path contains invalid characters');
         }
-        if(Str::startsWith($relativePath, DIRECTORY_SEPARATOR)) {
+        if(Str::startsWith($relativePath, ['/','\\'])) {
             $relativePath = substr($relativePath, 1);
         }
         $absolutePath = config('double.frontend_root') . DIRECTORY_SEPARATOR . $relativePath;
