@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 use ReflectionClass;
+use ReflectionMethod;
 use Sopamo\Double\PHPLoader;
 
 class DoubleApiController extends BaseController
@@ -15,7 +16,7 @@ class DoubleApiController extends BaseController
         $source = $loader->getSource($request->input('path'));
         $instance = new $source();
         $class = new ReflectionClass($instance);
-        $methods = $class->getMethods();
+        $methods = $class->getMethods(ReflectionMethod::IS_PUBLIC);
 
         $response = [];
         $originalConfig = [];
