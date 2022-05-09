@@ -16,7 +16,9 @@ class DoubleApiController extends BaseController
         $source = $loader->getSource($request->input('path'));
         $instance = new $source();
         $class = new ReflectionClass($instance);
-        $methods = $class->getMethods(ReflectionMethod::IS_PUBLIC);
+        $methods = array_filter($class->getMethods(ReflectionMethod::IS_PUBLIC), function($method) {
+            return !$method->isStatic();
+        });
 
         $response = [];
         $originalConfig = [];
